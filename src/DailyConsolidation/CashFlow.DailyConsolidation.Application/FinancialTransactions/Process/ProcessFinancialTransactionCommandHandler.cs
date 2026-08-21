@@ -17,6 +17,6 @@ internal sealed class ProcessFinancialTransactionCommandHandler(
             ? request.Amount
             : 0m;
 
-        await dailyBalanceRepository.ApplyTransactionAsync(request.OccurredOn, creditAmount, debitAmount, cancellationToken);
+        await dailyBalanceRepository.ApplyTransactionAsync(request.Id, request.OccurredOn, creditAmount, debitAmount, cancellationToken);
     }
 }

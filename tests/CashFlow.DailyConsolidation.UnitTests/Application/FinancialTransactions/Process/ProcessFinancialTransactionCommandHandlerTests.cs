@@ -27,6 +27,7 @@ public sealed class ProcessFinancialTransactionCommandHandlerTests
         // Assert
         await repository.Received(1)
                         .ApplyTransactionAsync(
+                            command.Id,
                             command.OccurredOn,
                             command.Amount,
                             0m,
@@ -55,6 +56,7 @@ public sealed class ProcessFinancialTransactionCommandHandlerTests
         // Assert
         await repository.Received(1)
                         .ApplyTransactionAsync(
+                            command.Id,
                             command.OccurredOn,
                             0m,
                             command.Amount,

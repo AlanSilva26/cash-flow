@@ -6,14 +6,29 @@ namespace CashFlow.DailyConsolidation.Infrastructure.Persistence.Repositories;
 
 internal sealed class DailyBalanceRepository(DailyConsolidationDbContext context) : IDailyBalanceRepository
 {
-    public async Task ApplyTransactionAsync(DateOnly date, decimal creditAmount, decimal debitAmount, CancellationToken cancellationToken = default)
+    public async Task ApplyTransactionAsync(Guid transactionId, DateOnly date, decimal creditAmount, decimal debitAmount, CancellationToken cancellationToken = default)
     {
+        var processedOnUtc = DateTime.UtcNow;
+
         await context.Database.ExecuteSqlInterpolatedAsync(
             $"""
+            WITH processed_message AS
+            (
+                INSERT INTO processed_messages
+                    ("Id", "ProcessedOnUtc")
+                VALUES
+                    ({transactionId}, {processedOnUtc})
+                ON CONFLICT ("Id") DO NOTHING
+                RETURNING "Id"
+            )
             INSERT INTO daily_balances
                 ("Date", "TotalCredits", "TotalDebits", "Balance")
-            VALUES
-                ({date}, {creditAmount}, {debitAmount}, {creditAmount - debitAmount})
+            SELECT
+                {date},
+                {creditAmount},
+                {debitAmount},
+                {creditAmount - debitAmount}
+            FROM processed_message
             ON CONFLICT ("Date")
             DO UPDATE SET
                 "TotalCredits" = daily_balances."TotalCredits" + EXCLUDED."TotalCredits",

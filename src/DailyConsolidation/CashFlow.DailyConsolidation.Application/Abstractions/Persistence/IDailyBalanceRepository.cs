@@ -6,5 +6,5 @@ public interface IDailyBalanceRepository
 {
     Task<DailyBalance?> GetByDateAsync(DateOnly date, CancellationToken cancellationToken = default);
 
-    Task ApplyTransactionAsync(DateOnly date, decimal creditAmount, decimal debitAmount, CancellationToken cancellationToken = default);
+    Task ApplyTransactionAsync(Guid transactionId, DateOnly date, decimal creditAmount, decimal debitAmount, CancellationToken cancellationToken = default);
 }

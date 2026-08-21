@@ -1,4 +1,5 @@
 ﻿using CashFlow.DailyConsolidation.Application.Abstractions.Persistence;
+using CashFlow.DailyConsolidation.Infrastructure.Messaging.RabbitMq;
 using CashFlow.DailyConsolidation.Infrastructure.Persistence;
 using CashFlow.DailyConsolidation.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ public static class DependencyInjection
         services.AddDbContext<DailyConsolidationDbContext>(
             options => options.UseNpgsql(connectionString)
         );
+
+        services.Configure<RabbitMqOptions>(configuration.GetSection(RabbitMqOptions.SectionName));
+
+        services.AddHostedService<FinancialTransactionCreatedConsumer>();
 
         services.AddScoped<IDailyBalanceRepository, DailyBalanceRepository>();
 

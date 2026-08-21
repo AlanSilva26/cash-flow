@@ -1,5 +1,6 @@
 ﻿using CashFlow.Transaction.Application.Abstractions.Messaging;
 using CashFlow.Transaction.Application.Abstractions.Persistence;
+using CashFlow.Transaction.Infrastructure.Messaging.RabbitMq;
 using CashFlow.Transaction.Infrastructure.Persistence;
 using CashFlow.Transaction.Infrastructure.Persistence.Outbox;
 using CashFlow.Transaction.Infrastructure.Persistence.Repositories;
@@ -17,6 +18,14 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException("Connection string 'TransactionDatabase' was not found.");
 
         services.AddDbContext<TransactionDbContext>(options => options.UseNpgsql(connectionString));
+
+        services.Configure<RabbitMqOptions>(configuration.GetSection(RabbitMqOptions.SectionName));
+
+        services.AddSingleton<RabbitMqPublisher>();
+
+        services.AddScoped<OutboxProcessor>();
+
+        services.AddHostedService<OutboxBackgroundService>();
 
         services.AddScoped<IFinancialTransactionRepository, FinancialTransactionRepository>();
 
