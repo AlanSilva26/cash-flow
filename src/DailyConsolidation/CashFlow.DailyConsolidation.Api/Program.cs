@@ -1,7 +1,12 @@
+using CashFlow.DailyConsolidation.Api.Endpoints;
+using CashFlow.DailyConsolidation.Api.Errors;
 using CashFlow.DailyConsolidation.Application;
 using CashFlow.DailyConsolidation.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddInfrastructure(builder.Configuration)
                 .AddApplication()
@@ -19,6 +24,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseExceptionHandler();
+
 app.UseHttpsRedirection();
+
+app.MapDailyBalanceEndpoints();
 
 app.Run();

@@ -1,7 +1,12 @@
+using CashFlow.Transaction.Api.Endpoints;
+using CashFlow.Transaction.Api.Errors;
 using CashFlow.Transaction.Application;
 using CashFlow.Transaction.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddInfrastructure(builder.Configuration)
                 .AddApplication()
@@ -19,6 +24,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseExceptionHandler();
+
 app.UseHttpsRedirection();
+
+app.MapTransactionEndpoints();
 
 app.Run();
