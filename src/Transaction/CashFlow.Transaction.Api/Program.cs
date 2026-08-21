@@ -1,5 +1,6 @@
 using CashFlow.Transaction.Api.Endpoints;
 using CashFlow.Transaction.Api.Errors;
+using CashFlow.Transaction.Api.Extensions;
 using CashFlow.Transaction.Application;
 using CashFlow.Transaction.Infrastructure;
 
@@ -13,6 +14,8 @@ builder.Services.AddInfrastructure(builder.Configuration)
                 .AddOpenApi();
 
 var app = builder.Build();
+
+await app.ApplyMigrationsAsync();
 
 if (app.Environment.IsDevelopment())
 {

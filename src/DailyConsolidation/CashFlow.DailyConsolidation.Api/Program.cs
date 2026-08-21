@@ -1,5 +1,6 @@
 using CashFlow.DailyConsolidation.Api.Endpoints;
 using CashFlow.DailyConsolidation.Api.Errors;
+using CashFlow.DailyConsolidation.Api.Extensions;
 using CashFlow.DailyConsolidation.Application;
 using CashFlow.DailyConsolidation.Infrastructure;
 
@@ -13,6 +14,8 @@ builder.Services.AddInfrastructure(builder.Configuration)
                 .AddOpenApi();
 
 var app = builder.Build();
+
+await app.ApplyMigrationsAsync();
 
 if (app.Environment.IsDevelopment())
 {

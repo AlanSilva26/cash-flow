@@ -1,0 +1,2 @@
+CREATE DATABASE cash_flow_transaction;
+CREATE DATABASE cash_flow_daily_consolidation;
