@@ -44,7 +44,10 @@ services:
       RabbitMq__UserName: guest
       RabbitMq__Password: guest
       RabbitMq__ExchangeName: cash-flow
+      RabbitMq__QueueName: cash-flow.daily-consolidation
       RabbitMq__RoutingKey: financial-transaction-created
+      RabbitMq__DeadLetterQueueName: cash-flow.daily-consolidation.dead-letter
+      RabbitMq__DeadLetterRoutingKey: financial-transaction-created.dead-letter
     ports:
       - "5232:8080"
     depends_on:
