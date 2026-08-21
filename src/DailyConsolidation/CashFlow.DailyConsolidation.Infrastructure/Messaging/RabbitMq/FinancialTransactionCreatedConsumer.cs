@@ -122,13 +122,13 @@ internal sealed class FinancialTransactionCreatedConsumer(
             {
                 logger.LogError(
                     exception,
-                    "An error occurred while processing a financial transaction event."
+                    "An error occurred while processing a financial transaction event. The message will be dead-lettered."
                 );
 
                 await channel.BasicNackAsync(
                     eventArgs.DeliveryTag,
                     multiple: false,
-                    requeue: true,
+                    requeue: false,
                     cancellationToken: stoppingToken
                 );
             }
