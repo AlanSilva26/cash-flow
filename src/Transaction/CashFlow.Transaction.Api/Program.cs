@@ -1,10 +1,11 @@
+using CashFlow.Transaction.Application;
 using CashFlow.Transaction.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructure(builder.Configuration);
-
-builder.Services.AddOpenApi();
+builder.Services.AddInfrastructure(builder.Configuration)
+                .AddApplication()
+                .AddOpenApi();
 
 var app = builder.Build();
 

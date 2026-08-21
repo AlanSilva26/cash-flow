@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Transaction\CashFlow.Transaction.Infrastructure\CashFlow.Transaction.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Transaction\CashFlow.Transaction.Application\CashFlow.Transaction.Application.csproj" />
   </ItemGroup>
 
 </Project>
