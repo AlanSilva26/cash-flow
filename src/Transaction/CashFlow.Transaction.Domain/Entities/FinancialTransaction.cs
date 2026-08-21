@@ -3,7 +3,7 @@ using CashFlow.Transaction.Domain.Enums;
 
 namespace CashFlow.Transaction.Domain.Entities;
 
-public sealed class Transaction
+public sealed class FinancialTransaction
 {
     public Guid Id { get; private set; }
 
@@ -13,9 +13,9 @@ public sealed class Transaction
 
     public DateOnly OccurredOn { get; private set; }
 
-    private Transaction() { }
+    private FinancialTransaction() { }
 
-    public Transaction(Guid id, decimal amount, TransactionType type, DateOnly occurredOn)
+    public FinancialTransaction(Guid id, decimal amount, TransactionType type, DateOnly occurredOn)
     {
         Id = Guard.AgainstEmpty(id, fieldName: "Id");
         Amount = ValidateAmount(amount);

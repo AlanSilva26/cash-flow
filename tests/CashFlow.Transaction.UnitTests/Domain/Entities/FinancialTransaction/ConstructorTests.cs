@@ -1,9 +1,9 @@
 ﻿using CashFlow.Transaction.Domain.Enums;
 using CashFlow.Transaction.Domain.Exceptions;
 using FluentAssertions;
-using TransactionEntity = CashFlow.Transaction.Domain.Entities.Transaction;
+using FinancialTransactionEntity = CashFlow.Transaction.Domain.Entities.FinancialTransaction;
 
-namespace CashFlow.Transaction.UnitTests.Domain.Entities.Transaction;
+namespace CashFlow.Transaction.UnitTests.Domain.Entities.FinancialTransaction;
 
 public sealed class ConstructorTests
 {
@@ -17,7 +17,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        var transaction = new TransactionEntity(id, amount, type, occurredOn);
+        var transaction = new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         transaction.Id.Should().Be(id);
@@ -36,7 +36,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        Action action = () => new TransactionEntity(id, amount, type, occurredOn);
+        Action action = () => new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         action.Should()
@@ -57,7 +57,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        Action action = () => new TransactionEntity(id, amount, type, occurredOn);
+        Action action = () => new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         action.Should()
@@ -78,7 +78,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        Action action = () => new TransactionEntity(id, amount, type, occurredOn);
+        Action action = () => new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         action.Should()
@@ -100,7 +100,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        var transaction = new TransactionEntity(id, amount, type, occurredOn);
+        var transaction = new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         transaction.Amount.Should().Be(amount);
@@ -117,7 +117,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        var transaction = new TransactionEntity(id, amount, type, occurredOn);
+        var transaction = new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         transaction.Type.Should().Be(type);
@@ -138,7 +138,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        Action action = () => new TransactionEntity(id, amount, type, occurredOn);
+        Action action = () => new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         action.Should()
@@ -156,7 +156,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow);
 
         // Act
-        var transaction = new TransactionEntity(id, amount, type, occurredOn);
+        var transaction = new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         transaction.OccurredOn.Should().Be(occurredOn);
@@ -172,7 +172,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-1);
 
         // Act
-        var transaction = new TransactionEntity(id, amount, type, occurredOn);
+        var transaction = new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         transaction.OccurredOn.Should().Be(occurredOn);
@@ -188,7 +188,7 @@ public sealed class ConstructorTests
         var occurredOn = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(1);
 
         // Act
-        Action action = () => new TransactionEntity(id, amount, type, occurredOn);
+        Action action = () => new FinancialTransactionEntity(id, amount, type, occurredOn);
 
         // Assert
         action.Should()

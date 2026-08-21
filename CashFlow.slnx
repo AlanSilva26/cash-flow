@@ -14,7 +14,9 @@
     <Project Path="src/Transaction/CashFlow.Transaction.Infrastructure/CashFlow.Transaction.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/CashFlow.DailyConsolidation.IntegrationTests/CashFlow.DailyConsolidation.IntegrationTests.csproj" />
     <Project Path="tests/CashFlow.DailyConsolidation.UnitTests/CashFlow.DailyConsolidation.UnitTests.csproj" />
+    <Project Path="tests/CashFlow.Transaction.IntegrationTests/CashFlow.Transaction.IntegrationTests.csproj" />
     <Project Path="tests/CashFlow.Transaction.UnitTests/CashFlow.Transaction.UnitTests.csproj" />
   </Folder>
 </Solution>
