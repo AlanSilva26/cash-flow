@@ -49,7 +49,11 @@ public sealed class CreateFinancialTransactionIntegrationTests
         try
         {
             // Act
-            transactionId = await sender.Send(command);
+            var result = await sender.Send(command);
+
+            result.IsSuccess.Should().BeTrue();
+
+            transactionId = result.Value;
 
             // Assert
             var financialTransaction = await context.FinancialTransactions.AsNoTracking()

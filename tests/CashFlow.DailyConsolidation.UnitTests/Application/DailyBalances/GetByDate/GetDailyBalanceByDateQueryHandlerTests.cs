@@ -35,14 +35,15 @@ public sealed class GetDailyBalanceByDateQueryHandlerTests
         var result = await handler.Handle(query, CancellationToken.None);
 
         // Assert
-        result.Should().BeEquivalentTo(expectedBalance);
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().BeEquivalentTo(expectedBalance);
 
         await repository.Received(1)
                         .GetByDateAsync(date, Arg.Any<CancellationToken>());
     }
 
     [Fact]
-    public async Task Handle_WhenBalanceDoesNotExist_ShouldReturnNull()
+    public async Task Handle_WhenBalanceDoesNotExist_ShouldReturnNotFound()
     {
         // Arrange
         var repository = Substitute.For<IDailyBalanceRepository>();
@@ -60,6 +61,7 @@ public sealed class GetDailyBalanceByDateQueryHandlerTests
         var result = await handler.Handle(query, CancellationToken.None);
 
         // Assert
-        result.Should().BeNull();
+        result.IsFailure.Should().BeTrue();
+        result.Error.Code.Should().Be("DailyBalance.NotFound");
     }
 }

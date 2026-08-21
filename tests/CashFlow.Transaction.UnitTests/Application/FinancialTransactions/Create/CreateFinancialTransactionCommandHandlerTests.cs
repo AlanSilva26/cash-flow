@@ -24,9 +24,13 @@ public sealed class CreateFinancialTransactionCommandHandlerTests
         var command = new CreateFinancialTransactionCommand(100.50m, TransactionType.Credit, DateOnly.FromDateTime(DateTime.UtcNow));
 
         // Act
-        var id = await handler.Handle(command, CancellationToken.None);
+        var result = await handler.Handle(command, CancellationToken.None);
 
         // Assert
+        result.IsSuccess.Should().BeTrue();
+
+        var id = result.Value;
+
         id.Should().NotBeEmpty();
 
         await repository.Received(1)
